@@ -12,45 +12,45 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.assertEquals;
 
 public class UrlTest {
-    WebDriver driver; // объявление драйвера
-    private final String expectedUrlScooter = "https://qa-scooter.praktikum-services.ru/"; // объявление значения URL ОР при нажатии на самокат в хидере
-    private final String expectedUrlYandex = "https://ya.ru/"; // объявление значения URL ОР при нажатии на Яндекс в хидере
+    WebDriver driver;
+    private final String expectedUrlScooter = "https://qa-scooter.praktikum-services.ru/";
+    private final String expectedUrlYandex = "https://ya.ru/";
 
     @Before
     public void setUp() {
-        WebDriverManager.chromedriver().setup(); // установка драйвера браузера хром
+        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        /*WebDriverManager.firefoxdriver().setup(); // установка драйвера браузера фаерфокс
+        /*WebDriverManager.firefoxdriver().setup();
         driver = new FirefoxDriver();*/
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS); // ожидание при поиске локаторов
-        driver.get("https://qa-scooter.praktikum-services.ru/"); // открытие страницы в браузере
-        driver.manage().window().fullscreen(); // фуллскрин для браузера
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.get("https://qa-scooter.praktikum-services.ru/");
+        driver.manage().window().fullscreen();
     }
 
     @Test
     public void urlTestScooter() {
-        MainPageElements mainPage = new MainPageElements(driver); // создание экземпляра главной страницы
-        mainPage.clickLogoScooter(); // клик по самокату в хидере
+        MainPageElements mainPage = new MainPageElements(driver);
+        mainPage.clickLogoScooter();
         Set<String> windowHandles = driver.getWindowHandles();
         for (String windowHandle : windowHandles) {
             driver.switchTo().window(windowHandle);
-        } // переход на новую вкладку, если таковая появилась
-        assertEquals(expectedUrlScooter, driver.getCurrentUrl()); // сравнение фактического URL с ожидаемым
+        }
+        assertEquals(expectedUrlScooter, driver.getCurrentUrl());
     }
 
     @Test
     public void urlTestYandex() {
-        MainPageElements mainPage = new MainPageElements(driver); // создание экземпляра главной страницы
-        mainPage.clickLogoYandex(); // клик по Яндексу в хидере
+        MainPageElements mainPage = new MainPageElements(driver);
+        mainPage.clickLogoYandex();
         Set<String> windowHandles = driver.getWindowHandles();
         for (String windowHandle : windowHandles) {
             driver.switchTo().window(windowHandle);
-        } // переход на новую вкладку, если таковая появилась
-        assertEquals(expectedUrlYandex, driver.getCurrentUrl()); // сравнение фактического URL с ожидаемым
+        }
+        assertEquals(expectedUrlYandex, driver.getCurrentUrl());
     }
 
     @After
     public void tearDown() {
         driver.quit();
-    } // закрываем браузер
+    }
 }
