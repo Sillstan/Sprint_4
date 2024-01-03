@@ -14,31 +14,31 @@ public class ErrorsFieldsInOrderFormsTest {
 
     @Before
     public void setUp() {
-        WebDriverManager.chromedriver().setup(); // установка драйвера браузера хром
+        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        /*WebDriverManager.firefoxdriver().setup(); // установка драйвера браузера фаерфокс
+        /*WebDriverManager.firefoxdriver().setup();
         driver = new FirefoxDriver();*/
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS); // ожидание при поиске локаторов
-        driver.get("https://qa-scooter.praktikum-services.ru/"); // открытие страницы в браузере
-        driver.manage().window().fullscreen(); // фуллскрин для браузера
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.get("https://qa-scooter.praktikum-services.ru/");
+        driver.manage().window().fullscreen();
     }
 
     @Test
     public void errorsFieldsInForWhomFormTest() {
-        MainPageElements mainPage = new MainPageElements(driver); // создание экземпляра главной страницы
-        mainPage.clickAcceptCookiesButton(); // принимаем куки
-        mainPage.clickEditOrderButtonHeader(); // нажатие на верхнюю кнопку заказать
-        ForWhomFormElements forWhomForm = new ForWhomFormElements(driver); // создание экземпляра страницы для кого самокат
-        forWhomForm.clickNextButton(); // клик по кнопке далее
-        Assert.assertTrue("Ошибка в поле Имя не появилась", forWhomForm.errorNameFieldIsDisplayed()); // проверка появилась ли ошибка в поле имя
-        Assert.assertTrue("Ошибка в поле Фамилия не появилась", forWhomForm.errorSurnameFieldIsDisplayed()); // проверка появилась ли ошибка в поле фамилия
-        Assert.assertTrue("Ошибка в поле Адрес не появилась", forWhomForm.errorAddressFieldIsDisplayed()); // проверка появилась ли ошибка в поле адрес
-        Assert.assertTrue("Ошибка в поле Метро не появилась", forWhomForm.errorMetroFieldIsDisplayed()); // проверка появилась ли ошибка в поле метро
-        Assert.assertTrue("Ошибка в поле Телефон не появилась", forWhomForm.errorPhoneNumberFieldIsDisplayed()); // проверка появилась ли ошибка в поле телефон
+        MainPageElements mainPage = new MainPageElements(driver);
+        mainPage.clickAcceptCookiesButton();
+        mainPage.clickEditOrderButtonHeader();
+        ForWhomFormElements forWhomForm = new ForWhomFormElements(driver);
+        forWhomForm.clickNextButton();
+        Assert.assertTrue("Ошибка в поле Имя не появилась", forWhomForm.errorNameFieldIsDisplayed());
+        Assert.assertTrue("Ошибка в поле Фамилия не появилась", forWhomForm.errorSurnameFieldIsDisplayed());
+        Assert.assertTrue("Ошибка в поле Адрес не появилась", forWhomForm.errorAddressFieldIsDisplayed());
+        Assert.assertTrue("Ошибка в поле Метро не появилась", forWhomForm.errorMetroFieldIsDisplayed());
+        Assert.assertTrue("Ошибка в поле Телефон не появилась", forWhomForm.errorPhoneNumberFieldIsDisplayed());
     }
 
     @After
     public void tearDown() {
         driver.quit();
-    } // закрываем браузер
+    }
 }
