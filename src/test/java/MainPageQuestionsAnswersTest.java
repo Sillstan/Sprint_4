@@ -12,16 +12,16 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 
-@RunWith(Parameterized.class) // запуск с параметризацией
+@RunWith(Parameterized.class)
 public class MainPageQuestionsAnswersTest {
-    WebDriver driver; // объявление драйвера
-    private final int index; // объявление значения для локаторов вопросов и ответов
-    private final String expected; // объявление значения текста ОР
+    WebDriver driver;
+    private final int index;
+    private final String expected;
     public MainPageQuestionsAnswersTest(int index, String expected) {
         this.index = index;
         this.expected = expected;
-    } // инициализация переменных ОР и локторов вопросов и ответов
-    @Parameterized.Parameters // параметры для теста
+    }
+    @Parameterized.Parameters
     public static Object[][] getDataTest() {
         return new Object[][] {
                 {0, "Сутки — 400 рублей. Оплата курьеру — наличными или картой."},
@@ -37,25 +37,25 @@ public class MainPageQuestionsAnswersTest {
 
     @Before
     public void setUp() {
-        WebDriverManager.chromedriver().setup(); // установка драйвера браузера хром
+        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        /*WebDriverManager.firefoxdriver().setup(); // установка драйвера браузера фаерфокс
+        /*WebDriverManager.firefoxdriver().setup();
         driver = new FirefoxDriver();*/
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS); // ожидание при поиске локаторов
-        driver.get("https://qa-scooter.praktikum-services.ru/"); // открытие страницы в браузере
-        driver.manage().window().fullscreen(); // фуллскрин для браузера
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.get("https://qa-scooter.praktikum-services.ru/");
+        driver.manage().window().fullscreen();
     }
 
     @Test
     public void mainPageQuestionsAnswersTest() {
-        MainPageElements mainPage = new MainPageElements(driver); // создание экземпляра главной страницы
-        mainPage.clickAcceptCookiesButton(); // принимаем куки
-        mainPage.scrollAndClickQuestion(index); // скролл и клик по вопросу
-        assertEquals(expected, mainPage.getTextAnswer(index)); // сравнение текста ответа на вопрос с индексом из параметров
+        MainPageElements mainPage = new MainPageElements(driver);
+        mainPage.clickAcceptCookiesButton();
+        mainPage.scrollAndClickQuestion(index);
+        assertEquals(expected, mainPage.getTextAnswer(index));
     }
 
     @After
     public void tearDown() {
         driver.quit();
-    } // закрываем браузер
+    }
 }
