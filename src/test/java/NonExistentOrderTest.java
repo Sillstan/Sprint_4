@@ -11,30 +11,30 @@ import java.util.concurrent.TimeUnit;
 
 public class NonExistentOrderTest {
     WebDriver driver; // объявление драйвера
-    private final String numberOfOrder = "100500"; // тестовое значение номера заказа
+    private final String numberOfOrder = "100500";
     @Before
     public void setUp() {
-        WebDriverManager.chromedriver().setup(); // установка драйвера браузера хром
+        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        /*WebDriverManager.firefoxdriver().setup(); // установка драйвера браузера фаерфокс
+        /*WebDriverManager.firefoxdriver().setup();
         driver = new FirefoxDriver();*/
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS); // ожидание при поиске локаторов
-        driver.get("https://qa-scooter.praktikum-services.ru/"); // открытие страницы в браузере
-        driver.manage().window().fullscreen(); // фуллскрин для браузера
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.get("https://qa-scooter.praktikum-services.ru/");
+        driver.manage().window().fullscreen();
     }
 
     @Test
     public void nonExistentOrderTest() {
-        MainPageElements mainPage = new MainPageElements(driver); // создание экземпляра главной страницы
-        mainPage.clickAcceptCookiesButton(); // принимаем куки
-        mainPage.clickStatusOfOrderButton(); // клик по кнопке статус заказа
-        mainPage.clickAndSendKeyToStatusOfOrderField(numberOfOrder); // клик и ввод данных в поле номер заказа
-        mainPage.clickGoButton(); // клик по кнопке го
-        Assert.assertTrue("Система не пишет, что заказа не существует", mainPage.getStatusNotFoundOrder()); // прояверяем появилось ли сообщение о том что заказ с таким номером не найден
+        MainPageElements mainPage = new MainPageElements(driver);
+        mainPage.clickAcceptCookiesButton();
+        mainPage.clickStatusOfOrderButton();
+        mainPage.clickAndSendKeyToStatusOfOrderField(numberOfOrder);
+        mainPage.clickGoButton();
+        Assert.assertTrue("Система не пишет, что заказа не существует", mainPage.getStatusNotFoundOrder());
     }
 
     @After
     public void tearDown() {
         driver.quit();
-    } // закрываем браузер
+    }
 }
